@@ -396,4 +396,28 @@ const raw=location.hash.slice(1)||'/',[path,query='']=raw.split('?'),params=new 
 document.querySelectorAll('.navigation a').forEach(a=>{const active=a.getAttribute('href')==='#'+path;a.classList.toggle('active',active);if(active)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});setMenu(false);hydrateAssets();attachFilters(path,params);if(path==='/search')attachSearch(params);attachCitation();window.scrollTo({top:0,behavior:'instant'});if(params.get('section'))document.getElementById(params.get('section'))?.scrollIntoView();}
 const copyright=document.querySelector('.footer-bottom span');if(copyright)copyright.textContent=copyright.textContent.replace(/© \d{4}/,'© '+new Date().getFullYear());window.addEventListener('hashchange',render);render();
 })();
-</script><noscript><p class="portable-note">Enable JavaScript for navigation, search, photographs and downloads in this self-contained HTML edition.</p></noscript></body></html>
+</script><script type="module">
+// Vercel Web Analytics
+// This script injects Vercel Analytics into the page
+(function() {
+  // Initialize the analytics queue
+  window.va = window.va || function () { 
+    (window.vaq = window.vaq || []).push(arguments); 
+  };
+  
+  // For local development with node_modules
+  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+    import('./node_modules/@vercel/analytics/dist/index.mjs')
+      .then(({ inject }) => inject({ debug: true }))
+      .catch(err => console.log('Analytics not available in development'));
+  } else {
+    // Production: Vercel will serve the analytics script
+    // The script will be automatically injected by Vercel when deployed
+    const script = document.createElement('script');
+    script.defer = true;
+    script.src = '/_vercel/insights/script.js';
+    document.head.appendChild(script);
+  }
+})();
+</script><noscript>
+<p class="portable-note">Enable JavaScript for navigation, search, photographs and downloads in this self-contained HTML edition.</p></noscript></body></html>
